@@ -44,7 +44,7 @@ namespace Cloud5mins.Function
                     log.LogInformation($"Found it: {newUrl.Url}");
                     newUrl.Clicks++;
                     var newClickStats = new ClickStatsEntity(newUrl.RowKey);
-                    newClickStats.Referrer = req.Headers.Referrer.ToString();
+                    newClickStats.Referrer = "https://www.lexplore.com";
                     stgHelper.SaveClickStatsEntity(newClickStats);
                     await stgHelper.SaveShortUrlEntity(newUrl);
                     redirectUrl = WebUtility.UrlDecode(newUrl.Url);
