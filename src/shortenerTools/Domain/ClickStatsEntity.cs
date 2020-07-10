@@ -11,6 +11,8 @@ namespace Cloud5mins.domain
 
         public string Referrer { get; set; }
 
+        public string UserAgent { get; set; }
+
         public ClickStatsEntity(){}
 
         public ClickStatsEntity(string vanity){
