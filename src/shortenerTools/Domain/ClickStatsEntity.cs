@@ -9,6 +9,8 @@ namespace Cloud5mins.domain
         //public string Id { get; set; }
         public string Datetime { get; set; }
 
+        public string Referrer { get; set; }
+
         public ClickStatsEntity(){}
 
         public ClickStatsEntity(string vanity){
