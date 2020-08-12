@@ -43,7 +43,18 @@ namespace Cloud5mins.Function
                 {
                     log.LogInformation($"Found it: {newUrl.Url}");
                     newUrl.Clicks++;
-                    stgHelper.SaveClickStatsEntity(new ClickStatsEntity(newUrl.RowKey));
+                    var newClickStats = new ClickStatsEntity(newUrl.RowKey);
+                    if(req.Headers.Referrer != null)
+                    {
+                        newClickStats.Referrer = req.Headers.Referrer.ToString();
+                    }
+
+                    if (req.Headers.UserAgent != null)
+                    {
+                        newClickStats.UserAgent = req.Headers.UserAgent.ToString();
+                    }
+
+                    stgHelper.SaveClickStatsEntity(newClickStats);
                     await stgHelper.SaveShortUrlEntity(newUrl);
                     redirectUrl = WebUtility.UrlDecode(newUrl.Url);
                 }
