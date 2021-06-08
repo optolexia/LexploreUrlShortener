@@ -27,7 +27,7 @@ namespace Cloud5mins.Function
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(context.FunctionAppDirectory)
-                    .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile("settings.json", optional: true, reloadOnChange: true)
                     .AddEnvironmentVariables()
                     .Build();
 
@@ -41,7 +41,7 @@ namespace Cloud5mins.Function
 
                 if (newUrl != null)
                 {
-                    log.LogInformation($"Found it: {newUrl.Url}");
+                    //log.LogInformation($"Found it: {newUrl.Url}");
                     newUrl.Clicks++;
                     var newClickStats = new ClickStatsEntity(newUrl.RowKey);
                     if(req.Headers.Referrer != null)
@@ -56,7 +56,7 @@ namespace Cloud5mins.Function
 
                     stgHelper.SaveClickStatsEntity(newClickStats);
                     await stgHelper.SaveShortUrlEntity(newUrl);
-                    redirectUrl = WebUtility.UrlDecode(newUrl.Url);
+                    redirectUrl = WebUtility.UrlDecode(newUrl.ActiveUrl);
                 }
             }
             else
